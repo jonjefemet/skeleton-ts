@@ -1,6 +1,5 @@
-export const config = {
+export const config = Object.freeze({
     server: {
-      port: process.env.PORT || 3000,
+        port: process.env.PORT || 3000,
     },
-  };
-  
+});

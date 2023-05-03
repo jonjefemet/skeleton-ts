@@ -1,11 +1,12 @@
-import express from "express";
-
-import Controller  from "./Controller";
+import express, { Request, Response } from "express";
+import HttpStatusCode from "../../../../src/utils/enums/httpStatusCode";
 
 const healthRouter = express.Router();
 
-const healthController = new Controller();
+healthRouter.get("/", async (req: Request, res: Response) => {
 
-healthRouter.get("/", healthController.run.bind(healthController));
+    res.status(HttpStatusCode.OK).send("OK");
+
+});
 
 export { healthRouter };
