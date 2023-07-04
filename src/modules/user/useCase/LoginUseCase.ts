@@ -6,13 +6,13 @@ import { LoginData, LoginToken } from "../domain/dto/loginDTO";
 @injectable()
 export default class LoginUseCase implements UseCase<LoginData, LoginToken> {
 
-    async excute(port: LoginData): Promise<LoginToken> {
+  async excute( port: LoginData ): Promise<LoginToken> {
 
-        const token = generateAccessToken({ username: port.username });
+    const token = generateAccessToken({ username: port.username });
 
-        return {
-            token: token
-        }
-    }
+    return {
+      token: token
+    };
+  }
 
 }

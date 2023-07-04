@@ -11,20 +11,18 @@ import { CustomError } from "../utils/errors/CustomError";
  * @param next NextFunction function provided by Express
  */
 function handleError(
-    err: TypeError | CustomError,
-    req: Request,
-    res: Response,
-    next: NextFunction
+  err: TypeError | CustomError,
+  req: Request,
+  res: Response,
+  next: NextFunction
 ) {
-    let customError = err;
+  let customError = err;
 
-    if (!(err instanceof CustomError)) {
-        customError = new CustomError(
-            "Oh no we are having troubles: " + err.message
-        );
-    }
+  if ( !( err instanceof CustomError )) {
+    customError = new CustomError( "Oh no we are having troubles: " + err.message );
+  }
 
-    res.status((customError as CustomError).status).send((customError as CustomError).format());
-};
+  res.status(( customError as CustomError ).status ).send(( customError as CustomError ).format());
+}
 
 export default handleError;

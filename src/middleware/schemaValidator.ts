@@ -10,38 +10,39 @@ export enum VALIDATOR_TYPE {
 }
 
 export interface IValidatorMiddleware {
-    schema: Joi.ObjectSchema<any> | Joi.ArraySchema | Joi.StringSchema | Joi.NumberSchema;
+    schema: Joi.ObjectSchema<unknown> | Joi.ArraySchema | Joi.StringSchema | Joi.NumberSchema;
     type: VALIDATOR_TYPE;
     pathParam?: string;
 }
 
-export function schemaValidator(validate: IValidatorMiddleware) {
+export function schemaValidator( validate: IValidatorMiddleware ) {
 
+  return function( req: Request, res: Response, next: NextFunction ) {
 
-    return function (req: Request, res: Response, next: NextFunction) {
+    if ( VALIDATOR_TYPE.BODY === validate.type ) {
+      const { error } = validate.schema.validate( req.body );
 
-        if (VALIDATOR_TYPE.BODY === validate.type) {
-            const { error } = validate.schema.validate(req.body);
-            if (error) {
-                throw new CustomError(error.details[0].message, HttpStatusCode.BAD_REQUEST);
-            }
-        }
-
-        if (VALIDATOR_TYPE.PATH === validate.type) {
-            const { error } = validate.schema.validate(req.path);
-            if (error) {
-                throw new CustomError(error.details[0].message, HttpStatusCode.BAD_REQUEST);
-            }
-        }
-
-        if (VALIDATOR_TYPE.QUERY === validate.type) {
-            const { error } = validate.schema.validate(req.query);
-            if (error) {
-                throw new CustomError(error.details[0].message, HttpStatusCode.BAD_REQUEST);
-            }
-        }
-
-
-        next();
+      if ( error ) {
+        throw new CustomError( error.details[0].message, HttpStatusCode.BAD_REQUEST );
+      }
     }
+
+    if ( VALIDATOR_TYPE.PATH === validate.type ) {
+      const { error } = validate.schema.validate( req.path );
+
+      if ( error ) {
+        throw new CustomError( error.details[0].message, HttpStatusCode.BAD_REQUEST );
+      }
+    }
+
+    if ( VALIDATOR_TYPE.QUERY === validate.type ) {
+      const { error } = validate.schema.validate( req.query );
+
+      if ( error ) {
+        throw new CustomError( error.details[0].message, HttpStatusCode.BAD_REQUEST );
+      }
+    }
+
+    next();
+  };
 }

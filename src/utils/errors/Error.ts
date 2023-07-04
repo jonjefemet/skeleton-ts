@@ -4,8 +4,8 @@ export default interface ErrorMiddleware {
     status: number;
     format(): {
         error: {
-            code: string,
-            message: string
-        }
+            code: string;
+            message: string;
+        };
     };
 }

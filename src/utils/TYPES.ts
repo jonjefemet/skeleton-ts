@@ -1,5 +1,5 @@
 export default {
-    LoginAdapter: Symbol.for("LoginAdapter"),
-    LoginUseCase: Symbol.for("LoginUseCase"),
+  LoginAdapter: Symbol.for( "LoginAdapter" ),
+  LoginUseCase: Symbol.for( "LoginUseCase" )
 
-}
+};

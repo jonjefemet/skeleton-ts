@@ -9,7 +9,7 @@ import TYPES from "../../../../src/utils/TYPES";
 
 const container = new Container();
 
-container.bind<Adapter<LoginData, LoginToken>>(TYPES.LoginAdapter).to(LoginAdapter);
-container.bind<UseCase<LoginData, LoginToken>>(TYPES.LoginUseCase).to(LoginUseCase);
+container.bind<Adapter<LoginData, LoginToken>>( TYPES.LoginAdapter ).to( LoginAdapter );
+container.bind<UseCase<LoginData, LoginToken>>( TYPES.LoginUseCase ).to( LoginUseCase );
 
 export default container;
