@@ -6,11 +6,11 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/src/app.js",
+    "prestart": "npx tsc",
     "dev": "ts-node-dev src/app.ts",
     "predev": "npm run swagger",
     "swagger": "tsoa spec",
     "format": "eslint . --fix"
-
   },
   "keywords": [],
   "author": "",
@@ -42,6 +42,7 @@
     "inversify": "^6.0.1",
     "joi": "^17.9.1",
     "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.1",
     "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",

@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 const DBSetting = Object.freeze({
   credentialPostgreSql: {
     username: process.env.DB_USERNAME,

@@ -1,23 +1,22 @@
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { DataSource } from "typeorm";
-import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
+import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 
 export default class DBConnectionHelper {
 
   async connect( url: { [key: string]: string }): Promise<DataSource> {
     const { dbname, port, password, host, username } = url;
-    const dataSourceOptions: MysqlConnectionOptions = {
-      type: "mysql",
+
+    const dataSourceOptions: PostgresConnectionOptions = {
       host,
       username,
       password,
       database: dbname,
       port: Number( port ),
       namingStrategy: new SnakeNamingStrategy(),
-      entities: [
-      ],
-      logging: true,
-      synchronize: true
+      entities: [],
+      synchronize: false,
+      type: "postgres"
     };
 
     return await new DataSource( dataSourceOptions ).initialize();

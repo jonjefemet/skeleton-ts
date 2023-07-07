@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import Controller from "./Controller";
+import Controller from "../../Controller";
 import { VALIDATOR_TYPE, schemaValidator } from "../../../../src/middleware/schemaValidator";
 import { Schema } from "./schema";
 import HttpStatusCode from "../../../../src/utils/enums/httpStatusCode";
@@ -12,7 +12,7 @@ loginRouter.post(
   async( req: Request, res: Response ) => {
 
     const controller = new Controller();
-    const result = await controller.run({ username: req.body.username, password: req.body.password });
+    const result = await controller.login({ username: req.body.username, password: req.body.password });
     res.status( HttpStatusCode.OK ).send( result );
 
   }

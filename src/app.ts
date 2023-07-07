@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import { config as dotEnvConfig } from "dotenv";
 import bodyParser from "body-parser";
 import { config } from "./config/server";
 import cors from "cors";
@@ -9,9 +8,8 @@ import { CustomError } from "./utils/errors/CustomError";
 import HttpStatusCode from "./utils/enums/httpStatusCode";
 import user from "../services/user/index";
 import swagger from "../services/swagger/index";
-
-dotEnvConfig();
-
+import dotenv from "dotenv";
+dotenv.config();
 class App {
 
   run() {

@@ -2,22 +2,16 @@ import { DataSource, QueryRunner } from "typeorm";
 import DBConnectionManager from "./interfaces/DBConnectionManager";
 import DBConnectionHelper from "./DBConnectionHelper";
 import DBSetting from "../../config/DBSetting";
+import { injectable } from "inversify";
+import { CustomError } from "../../utils/errors/CustomError";
+import HttpStatusCode from "../../utils/enums/httpStatusCode";
 
+@injectable()
 export default class ConnectionManagerPostgreSql implements DBConnectionManager {
-
-  private static instance: ConnectionManagerPostgreSql;
 
   private queryRunner: QueryRunner;
 
   private connection: DataSource;
-
-  public static getInstance(): ConnectionManagerPostgreSql {
-    if ( !ConnectionManagerPostgreSql.instance ) {
-      ConnectionManagerPostgreSql.instance = new ConnectionManagerPostgreSql();
-    }
-
-    return ConnectionManagerPostgreSql.instance;
-  }
 
   async connect(): Promise<DataSource> {
 
@@ -39,7 +33,7 @@ export default class ConnectionManagerPostgreSql implements DBConnectionManager 
 
     } catch ( error ) {
       console.log( "🚀 ~ ConnectionManagerPostgreSql ~ connect ~ error:", error );
-      throw error;
+      throw new CustomError( "INTERNAL_SERVER_ERROR", HttpStatusCode.INTERNAL_SERVER_ERROR );
     }
   }
 
@@ -48,7 +42,7 @@ export default class ConnectionManagerPostgreSql implements DBConnectionManager 
       await this.connection?.destroy();
     } catch ( error ) {
       console.log( "🚀 ~ ConnectionManagerPostgreSql ~ disconnect ~ error:", error );
-      throw error;
+      throw new CustomError( "INTERNAL_SERVER_ERROR", HttpStatusCode.INTERNAL_SERVER_ERROR );
     }
   }
 
@@ -87,7 +81,7 @@ export default class ConnectionManagerPostgreSql implements DBConnectionManager 
     } catch ( error ) {
       console.log( "🚀 ~ ConnectionManagerPostgreSql ~ beginTransaction ~ error:", error );
 
-      throw error;
+      throw new CustomError( "INTERNAL_SERVER_ERROR", HttpStatusCode.INTERNAL_SERVER_ERROR );
     }
   }
 

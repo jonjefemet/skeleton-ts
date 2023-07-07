@@ -1,5 +1,6 @@
 export default {
-  LoginAdapter: Symbol.for( "LoginAdapter" ),
-  LoginUseCase: Symbol.for( "LoginUseCase" )
+  LoginUseCase: Symbol.for( "LoginUseCase" ),
+  ConnectionManagerPostgreSql: Symbol.for( "ConnectionManagerPostgreSql" ),
+  LoginAdapter: Symbol.for( "LoginAdapter" )
 
 };
