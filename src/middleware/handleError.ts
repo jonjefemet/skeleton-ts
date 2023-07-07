@@ -23,6 +23,7 @@ function handleError(
   }
 
   res.status(( customError as CustomError ).status ).send(( customError as CustomError ).format());
+
 }
 
 export default handleError;

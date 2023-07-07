@@ -12,7 +12,10 @@ loginRouter.post(
   async( req: Request, res: Response ) => {
 
     const controller = new Controller();
-    const result = await controller.login({ username: req.body.username, password: req.body.password });
+    const result = await controller.login({ username: req.body.username, password: req.body.password }).catch( error => {
+      console.log( "🚀 ~ file: index.ts:16 ~ result ~ error:", error );
+       
+    }).then(() => "" );
     res.status( HttpStatusCode.OK ).send( result );
 
   }

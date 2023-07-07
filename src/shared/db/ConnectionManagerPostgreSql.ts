@@ -16,6 +16,7 @@ export default class ConnectionManagerPostgreSql implements DBConnectionManager 
   async connect(): Promise<DataSource> {
 
     try {
+      throw new CustomError( "INTERNAL_SERVER_ERROR", HttpStatusCode.INTERNAL_SERVER_ERROR );
 
       if ( !this.connection ) {
         this.connection = await new DBConnectionHelper().connect({
@@ -25,6 +26,7 @@ export default class ConnectionManagerPostgreSql implements DBConnectionManager 
           port: DBSetting.credentialPostgreSql.port,
           username: DBSetting.credentialPostgreSql.username
         });
+
       } else if ( !this.connection.isInitialized ) {
         await this.connection.initialize();
       }
@@ -33,7 +35,7 @@ export default class ConnectionManagerPostgreSql implements DBConnectionManager 
 
     } catch ( error ) {
       console.log( "🚀 ~ ConnectionManagerPostgreSql ~ connect ~ error:", error );
-      throw new CustomError( "INTERNAL_SERVER_ERROR", HttpStatusCode.INTERNAL_SERVER_ERROR );
+      throw error;
     }
   }
 
