@@ -12,19 +12,12 @@ export default class Controller {
   @Post( "/login" )
   @SuccessResponse( HttpStatusCode.OK )
   async login( @Body() args: { username: string; password: string }) {
-    try {
-      const adapter = containerLogin.get<Adapter<LoginData, LoginToken>>( TYPES.LoginAdapter );
+    const adapter = containerLogin.get<Adapter<LoginData, LoginToken>>( TYPES.LoginAdapter );
 
-      return adapter.excute({
-        username: args.username,
-        password: args.password
-      });
-    } catch ( error ) {
-      console.log( "🚀 ~ file: Controller.ts:23 ~ Controller ~ login ~ error:", error );
-
-      return {};
-    }
-
+    return adapter.excute({
+      username: args.username,
+      password: args.password
+    });
   }
 
   @Post( "/" )

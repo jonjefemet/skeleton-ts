@@ -1,6 +1,7 @@
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { DataSource } from "typeorm";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
+import User from "../../modules/user/domain/entity/User";
 
 export default class DBConnectionHelper {
 
@@ -14,8 +15,10 @@ export default class DBConnectionHelper {
       database: dbname,
       port: Number( port ),
       namingStrategy: new SnakeNamingStrategy(),
-      entities: [],
-      synchronize: false,
+      entities: [
+        User
+      ],
+      synchronize: true,
       type: "postgres"
     };
 

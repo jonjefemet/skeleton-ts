@@ -16,7 +16,6 @@ export default class ConnectionManagerPostgreSql implements DBConnectionManager 
   async connect(): Promise<DataSource> {
 
     try {
-      throw new CustomError( "INTERNAL_SERVER_ERROR", HttpStatusCode.INTERNAL_SERVER_ERROR );
 
       if ( !this.connection ) {
         this.connection = await new DBConnectionHelper().connect({
