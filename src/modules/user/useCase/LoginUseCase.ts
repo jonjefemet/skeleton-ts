@@ -19,7 +19,7 @@ export default class LoginUseCase implements UseCase<LoginData, LoginToken> {
   ) {}
   
   async excute( port: LoginData ): Promise<LoginToken> {
-    console.log( "💥 ~ file: LoginUseCase.ts:22 ~ LoginUseCase ~ excute ~ port\n:", port );
+
     await this.connectionManagerPostgreSql.connect();
 
     try {
