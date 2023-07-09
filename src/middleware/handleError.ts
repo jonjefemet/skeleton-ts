@@ -22,6 +22,7 @@ function handleError(
     customError = new CustomError( "Oh no we are having troubles: " + err.message );
   }
 
+  console.log( "💥 ~ file: handleError.ts:23 ~ customError\n:", customError );
   res.status(( customError as CustomError ).status ).send(( customError as CustomError ).format());
 
 }
